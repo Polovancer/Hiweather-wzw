@@ -8,7 +8,7 @@ public class City {
     private String allPY;
     private String allFirstPY;
 
-    public City(String province, String ciy, String number, String firstPY, String allPY, String allFirstPY) {
+    public City(String province, String city, String number, String firstPY, String allPY, String allFirstPY) {
         this.province = province;
         this.city = city;
         this.number = number;
@@ -65,3 +65,4 @@ public class City {
         this.allFirstPY = allFirstPY;
     }
 }
+
