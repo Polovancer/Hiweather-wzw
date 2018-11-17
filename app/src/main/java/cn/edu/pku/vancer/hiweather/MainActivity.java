@@ -9,6 +9,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import cn.edu.pku.vancer.util.NetUtil;
 public class MainActivity extends Activity implements View.OnClickListener {
     private static final int UPDATE_TODAY_WEATHER = 1;
     private ImageView mUpdateBtn;
+    private ProgressBar mUpdateProgressbar;//进度条
 
     private ImageView mCityselect;
 
@@ -42,6 +44,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
             switch (msg.what) {
                 case UPDATE_TODAY_WEATHER:
                     updateTodayWeather((TodayWeather) msg.obj);
+                    mUpdateBtn.setVisibility(View.VISIBLE);
+                    mUpdateProgressbar.setVisibility(View.GONE);
                     break;
                 default:
                     break;
@@ -112,6 +116,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void queryWeatherCode (String cityCode){
+
+        mUpdateBtn.setVisibility(View.GONE);
+        mUpdateProgressbar.setVisibility(View.VISIBLE);
+
         final String address = "http://wthrcdn.etouch.cn/WeatherApi?citykey=" + cityCode;
         Log.d("myweather", address);
         new Thread(new Runnable() {
@@ -257,6 +265,7 @@ void initView(){
     climateTv = (TextView) findViewById(R.id.climate);
     windTv = (TextView) findViewById(R.id.wind);
     weatherImg = (ImageView) findViewById(R.id.weather_img);
+    mUpdateProgressbar = findViewById(R.id.title_update_progress);
 
     city_name_Tv.setText("N/A");
     cityTv.setText("N/A");
